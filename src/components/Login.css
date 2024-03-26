@@ -1,0 +1,135 @@
+
+.login-container {
+    background-image: url('https://res.cloudinary.com/dgiuuuy5n/image/upload/v1702869118/photo-1526488807855-309186804587_gvq0ag.avif');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .login-form {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.5s ease;
+    max-width: 800px;
+    width: 90%;
+
+  }
+  
+  .login-form h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .login-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .login-form button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .error {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .auth-switch {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .auth-switch a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .auth-switch a:hover {
+    text-decoration: underline;
+  }
+
+  .password-input {
+  position: relative;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #495057;
+  font-size: 20px;
+}
+.password-input-group {
+  position: relative;
+}
+
+.password-toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px; 
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+  
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  
+
+
+@media screen and (min-width: 576px) {
+  .login-form {
+    width: 70%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .login-form {
+    width: 60%;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .login-form {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .login-form {
+    width: 40%;
+  }
+}
