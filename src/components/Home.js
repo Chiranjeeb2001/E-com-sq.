@@ -7,11 +7,11 @@ import '../App.css';
 import Navbar from './Navbar/Navbar';
 import Footer from './Footer/Footer';
 import Sidebar from './Sidebar/Sidebar';
-import { useLocation } from 'react-router-dom';
+
 import '@fortawesome/fontawesome-free/css/all.css';
 
 function Home() {
-  const location = useLocation();
+ 
   const [categoryFilter, setCategoryFilter] = useState('');
   const [priceRangeFilter, setPriceRangeFilter] = useState([0, 30000]);
   const [cartItems, setCartItems] = useState([]);
@@ -69,9 +69,11 @@ function Home() {
 
   return (
     <div>
+      
       <Navbar cartItems={cartItems} toggleCart={toggleCart} />
       <div className="container">
         <Sidebar
+        
           categories={['Shoes', 'Shirts', 'T-Shirts', 'Watches', 'Shorts']}
           setCategoryFilter={setCategoryFilter}
           setPriceRangeFilter={setPriceRangeFilter}
