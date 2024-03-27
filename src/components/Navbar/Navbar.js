@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import './Navbar.css';
 import CartIcon from '../CartIcon/CartIcon'; 
@@ -12,7 +10,6 @@ const Navbar = ({ cartItems, toggleCart }) => {
   };
 
   const handleLogout = () => {
-    
     window.location.href = "/"; 
   };
 
@@ -24,13 +21,14 @@ const Navbar = ({ cartItems, toggleCart }) => {
           <li><CartIcon onClick={toggleCart} cartItems={cartItems} /></li> 
        
           <li className="profile-dropdown">
-            <a href="#" onClick={toggleProfileDropdown}>Profile</a>
+            {/*eslint-disable-next-line*/}
+            <button onClick={toggleProfileDropdown}>Profile</button>
             {isProfileDropdownOpen && (
               <div className="dropdown-content">
-                <a href="#">Orders</a>
-                <a href="#">Account</a>
-                <a href="#">Settings</a>
-                <a href="#" onClick={handleLogout}>Logout</a>
+                <a href="/orders">Orders</a>
+                <a href="/account">Account</a>
+                <a href="/settings">Settings</a>
+                <button onClick={handleLogout}>Logout</button>
               </div>
             )}
           </li>
