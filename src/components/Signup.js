@@ -5,6 +5,8 @@ import "./Signup.css";
 
 function Signup() {
     const history = useNavigate();
+    const [firstName,setFirstName]=useState("");
+    const [lastName,setLastName]=useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -13,7 +15,9 @@ function Signup() {
         e.preventDefault();
         try {
             const response = await axios.post("http://localhost:8000/signup", {
-                email,
+            firstName,
+            lastName,    
+            email,
                 password,
             });
             if (response.data === "exist") {
@@ -32,6 +36,22 @@ function Signup() {
             <form className="signup-form" onSubmit={submit}>
                 <h1>Signup</h1>
                 {error && <div className="error">{error}</div>}
+                <input
+                type="text"
+                value={firstName}
+                onChange={(e)=> setFirstName(e.target.value)}
+                placeholder="First Name"
+                required
+                />
+
+<input
+                type="text"
+                value={lastName}
+                onChange={(e)=> setLastName(e.target.value)}
+                placeholder="Last Name"
+                required
+                />
+                
                 <input
                     type="email"
                     value={email}
