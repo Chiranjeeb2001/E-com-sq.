@@ -8,6 +8,10 @@
     justify-content: center;
     align-items: center;
   }
+  .capcha{
+    margin-bottom: 20px;
+   
+  }
   
   .login-form {
     background-color: rgba(255, 255, 255, 0.8);

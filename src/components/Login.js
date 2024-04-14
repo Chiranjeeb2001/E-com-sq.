@@ -1,20 +1,29 @@
-import React, { useState } from "react";
+import React, { useState ,useRef} from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import "./Login.css";
+import ReCAPCHA from 'react-google-recaptcha';
+
+
+const SITE_KEY='6LeiVbopAAAAAEKfOeJg2UtZgHgfOUM21BYV3Ai7'
 
 function Login() {
     const history = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [recaptchaValue,setRecapchaValue]=useState('');
+    const capchaRef=useRef();
 
     async function submit(e) {
         e.preventDefault();
+
+        capchaRef.current.reset();
+
         try {
             const response = await axios.post("http://localhost:8000/", {
                 email,
-                password,
+                password,recaptchaValue
             });
             if (response.data === "exist") {
                 history("/home", { state: { id: email } });
@@ -25,6 +34,10 @@ function Login() {
             console.log(e);
             setError("Something went wrong. Please try again.");
         }
+    }
+
+    const onChange =value=>{
+        setRecapchaValue(value)
     }
 
     return (
@@ -47,7 +60,14 @@ function Login() {
                         placeholder="Password"
                         required
                     />
-                    
+
+                <div className="capcha">
+                    <ReCAPCHA
+                    sitekey={SITE_KEY}
+                    onChange={onChange}
+                    ref={capchaRef}
+                    />
+                    </div>
                 </div>
                 <button type="submit">Login</button>
 
