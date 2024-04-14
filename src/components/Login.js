@@ -1,29 +1,34 @@
-import React, { useState ,useRef} from "react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import "./Login.css";
-import ReCAPCHA from 'react-google-recaptcha';
+import ReCAPTCHA from 'react-google-recaptcha';
 
-
-const SITE_KEY='6LeiVbopAAAAAEKfOeJg2UtZgHgfOUM21BYV3Ai7'
+const SITE_KEY = '6LeiVbopAAAAAEKfOeJg2UtZgHgfOUM21BYV3Ai7';
 
 function Login() {
     const history = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    const [recaptchaValue,setRecapchaValue]=useState('');
-    const capchaRef=useRef();
+    const [recaptchaValue, setRecaptchaValue] = useState("");
+    const captchaRef = useRef(); // Corrected variable name
 
     async function submit(e) {
         e.preventDefault();
 
-        capchaRef.current.reset();
+        if (!recaptchaValue) {
+            setError("Please click on the reCAPTCHA checkbox.");
+            return;
+        }
+
+        captchaRef.current.reset(); // Corrected variable name
 
         try {
             const response = await axios.post("http://localhost:8000/", {
                 email,
-                password,recaptchaValue
+                password,
+                recaptchaValue
             });
             if (response.data === "exist") {
                 history("/home", { state: { id: email } });
@@ -36,8 +41,9 @@ function Login() {
         }
     }
 
-    const onChange =value=>{
-        setRecapchaValue(value)
+    const onChange = value => {
+        setRecaptchaValue(value);
+        setError("");
     }
 
     return (
@@ -60,23 +66,20 @@ function Login() {
                         placeholder="Password"
                         required
                     />
-
-                <div className="capcha">
-                    <ReCAPCHA
-                    sitekey={SITE_KEY}
-                    onChange={onChange}
-                    ref={capchaRef}
-                    />
+                    <div className="capcha">
+                        <ReCAPTCHA
+                            sitekey={SITE_KEY}
+                            onChange={onChange}
+                            ref={captchaRef} 
+                        />
                     </div>
                 </div>
                 <button type="submit">Login</button>
-
                 <div className="auth-switch">
-                <p>OR</p>
-                <Link to="/signup">Signup Page</Link>
-            </div>
+                    <p>OR</p>
+                    <Link to="/signup">Signup Page</Link>
+                </div>
             </form>
-            
         </div>
     );
 }
